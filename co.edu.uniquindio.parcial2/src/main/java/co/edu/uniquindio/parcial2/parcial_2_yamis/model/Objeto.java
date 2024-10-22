@@ -3,6 +3,7 @@ package co.edu.uniquindio.parcial2.parcial_2_yamis.model;
 public class Objeto {
     private String nombre;
     private String id;
+    private int vecesPrestado;
     PrestamoUq ownedByPrestamoUq;
 
     public Objeto() {
@@ -11,6 +12,14 @@ public class Objeto {
     public Objeto(String nombre, String id) {
         this.nombre = nombre;
         this.id = id;
+    }
+
+    public int getVecesPrestado() {
+        return vecesPrestado;
+    }
+
+    public void setVecesPrestado(int vecesPrestado) {
+        this.vecesPrestado = vecesPrestado;
     }
 
     public String getNombre() {
@@ -42,6 +51,7 @@ public class Objeto {
         return "Objeto{" +
                 "nombre='" + nombre + '\'' +
                 ", id='" + id + '\'' +
+                ", vecesPrestado='" + vecesPrestado + '\'' +
                 '}';
     }
 }

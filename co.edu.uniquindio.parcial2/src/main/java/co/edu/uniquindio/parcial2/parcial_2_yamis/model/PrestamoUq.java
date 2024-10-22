@@ -1,6 +1,9 @@
 package co.edu.uniquindio.parcial2.parcial_2_yamis.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PrestamoUq {
@@ -8,7 +11,8 @@ public class PrestamoUq {
 
     List<Cliente> listaClientes = new ArrayList<>();
     List<Empleado> listaEmpleados = new ArrayList<>();
-    List<Objeto> listObjetos = new ArrayList<>();
+    List<Objeto> listaObjetos = new ArrayList<>();
+    List<Prestamo> listaPrestamos = new ArrayList<>();
 
     public PrestamoUq() {
     }
@@ -41,22 +45,24 @@ public class PrestamoUq {
         this.listaEmpleados = listaEmpleados;
     }
 
-    public List<Objeto> getListObjetos() {
-        return listObjetos;
+    public List<Objeto> getListaObjetos() {
+        return listaObjetos;
     }
 
-    public void setListObjetos(List<Objeto> listObjetos) {
-        this.listObjetos = listObjetos;
+    public void setListaObjetos(List<Objeto> listaObjetos) {
+        this.listaObjetos = listaObjetos;
     }
 
-    /**
-     *Metodo para crear un cliente
-     * @param nombre
-     * @param apellido
-     * @param cedula
-     * @param edad
-     */
-    public void crearCliente(String nombre, String apellido, String cedula, int edad){
+    public List<Prestamo> getListaPrestamos() {
+        return listaPrestamos;
+    }
+
+    public void setListaPrestamos(List<Prestamo> listaPrestamos) {
+        this.listaPrestamos = listaPrestamos;
+    }
+
+    public void crearCliente(String nombre, String apellido, String cedula,
+                             String edad){
         int resultadoBusqueda = devolverPosicionCliente(cedula);
         if (resultadoBusqueda == -1){
             Cliente cliente = new Cliente();
@@ -68,19 +74,13 @@ public class PrestamoUq {
             System.out.println("Ciente creado exitosamente");
 
         }else {
-            System.out.println("El cliente ya esta creado en el sistema");
+            System.out.println("El cliente ya está creado en el sistema");
         }
     }
 
-    /**
-     * Metodo para crear un empleado
-     * @param nombre
-     * @param apellido
-     * @param cedula
-     * @param edad
-     */
 
-    public void crearEmpleado(String nombre, String apellido, String cedula, int edad){
+    public void crearEmpleado(String nombre, String apellido, String cedula,
+                              String edad){
 
         int resultadoBusqueda = devolverPosicionEmpleado(cedula);
         if (resultadoBusqueda == -1){
@@ -93,15 +93,10 @@ public class PrestamoUq {
             System.out.println("Empleado creado exitosamente");
 
         }else {
-            System.out.println("El empleado ya esta creado en el sistema");
+            System.out.println("El empleado ya está creado en el sistema");
         }
     }
 
-    /**
-     * Metodo para crear un objeto
-     * @param nombre
-     * @param id
-     */
 
     public void crearObjeto(String nombre, String id){
 
@@ -110,43 +105,65 @@ public class PrestamoUq {
             Objeto objeto = new Objeto();
             objeto.setId(id);
             objeto.setNombre(nombre);
-            getListObjetos().add(objeto);
+            getListaObjetos().add(objeto);
             System.out.println("Objeto creado exitosamente");
 
         }else {
-            System.out.println("El objeto ya esta creado en el sistema");
+            System.out.println("El objeto ya está creado en el sistema");
         }
     }
 
-    /**
-     * Metodo para obtener la lista de todos los clientes
-     * @return list<Cliente>
-     */
+
+    public void crearPrestamo(String numeroPrestamo,
+                              String cedulaCliente,
+                              String cedulaEmpleado,
+                              String idObjeto, LocalDate fechaPrestamo,
+                              LocalDate fechaentrega, String descripcion){
+        int resultadoBusqueda = devolverPosicionPrestamo(numeroPrestamo);
+        if (resultadoBusqueda == -1){
+
+            Objeto objeto = mostrarObjeto(idObjeto);
+            objeto.setVecesPrestado( objeto.getVecesPrestado() + 1 );
+
+            Prestamo prestamo = new Prestamo();
+            prestamo.setCliente(mostrarCliente(cedulaCliente));
+            prestamo.setObjeto(objeto);
+            prestamo.setEmpleado(mostrarEmpleado(cedulaEmpleado));
+            prestamo.setNumeroPrestamo(numeroPrestamo);
+            prestamo.setFechaPrestamo(fechaPrestamo);
+            prestamo.setFechaEntrega(fechaentrega);
+            prestamo.setDescripcion(descripcion);
+            getListaPrestamos().add(prestamo);
+            System.out.println("Préstamo creado exitosamente");
+
+        }else {
+            System.out.println("El préstamo ya está creado en el sistema");
+        }
+    }
+
+
     public List<Cliente> obtenerClientes() {
+
         return getListaClientes();
     }
 
-    /**
-     * Metodo para obtener la lista de todos los empleados
-     * @return list<Empleado>
-     */
+
     public List<Empleado> obtenerEmpleados() {
         return getListaEmpleados();
     }
 
-    /**
-     * Metodo para obtener la lista de todos los objetos
-     * @return list<Objeto>
-     */
 
     public List<Objeto> obtenerObjetos() {
-        return getListObjetos();
+
+        return getListaObjetos();
     }
 
-    /**
-     * Metodo para eliminar un cliente
-     * @param cedula
-     */
+    public List<Prestamo> obtenerPrestamos() {
+
+        return getListaPrestamos();
+    }
+
+
 
     public void eliminarCliente(String cedula) {
         for (Cliente cliente : listaClientes){
@@ -158,10 +175,6 @@ public class PrestamoUq {
     }
 
 
-    /**
-     * Metodo para eliminar un empleado
-     * @param cedula
-     */
     public void eliminarEmpleado(String cedula){
         for (Empleado empleado : listaEmpleados){
             if (empleado.getCedula().equalsIgnoreCase(cedula)){
@@ -172,29 +185,31 @@ public class PrestamoUq {
 
     }
 
-    /**
-     * Metodo para eliminar un objeto
-     * @param id
-     */
+
     public void eliminarObjeto(String id) {
 
-        for (Objeto objeto : listObjetos){
+        for (Objeto objeto : listaObjetos){
             if (objeto.getId().equalsIgnoreCase(id)){
-                getListObjetos().remove(objeto);
+                getListaObjetos().remove(objeto);
                 break;
             }
         }
     }
 
-    /**
-     * Metodo para actualizar un empleado
-     * @param cedula
-     * @param nombre
-     * @param apellido
-     * @param edad
-     */
 
-    public void actualizarEmpleado (String cedula, String nombre, String apellido, int edad){
+    public void eliminarPrestamo(String numeroPrestamo) {
+
+        for (Prestamo prestamo : listaPrestamos){
+            if (prestamo.getNumeroPrestamo().equalsIgnoreCase(numeroPrestamo)){
+                getListaPrestamos().remove(prestamo);
+                break;
+            }
+        }
+    }
+
+
+    public void actualizarEmpleado (String cedula, String nombre,
+                                    String apellido, String edad){
         for (Empleado empleado : listaEmpleados){
             if (empleado.getCedula().equals(cedula)){
                 empleado.setNombre(nombre);
@@ -206,15 +221,9 @@ public class PrestamoUq {
 
     }
 
-    /**
-     * Metodo para actualizar un cliente
-     * @param cedula
-     * @param nombre
-     * @param apellido
-     * @param edad
-     */
 
-    public void actualizarCliente(String cedula, String nombre, String apellido, int edad) {
+    public void actualizarCliente(String cedula, String nombre,
+                                  String apellido, String  edad) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getCedula().equals(cedula)) {
                 cliente.setNombre(nombre);
@@ -225,15 +234,10 @@ public class PrestamoUq {
         }
     }
 
-    /**
-     * Metodo para actualizar un objeto
-     * @param id
-     * @param nuevoNombre
-     */
 
     public void actualizarObjeto(String id, String nuevoNombre){
 
-        for (Objeto objeto : listObjetos ){
+        for (Objeto objeto : listaObjetos){
             if (objeto.getId().equals(id)){
                 objeto.setNombre(nuevoNombre);
                 break;
@@ -241,11 +245,22 @@ public class PrestamoUq {
         }
     }
 
-    /**
-     * Metodo para comprobar si un empleado ya existe
-     * @param cedula
-     * @return
-     */
+
+    public void actualizarPrestamo(String numeroPrestamo,
+                                   LocalDate nuevaFechaPrestamo,
+                                   LocalDate nuevaFechaentrega,
+                                   String nuevaDescripcion){
+
+        for (Prestamo prestamo : listaPrestamos){
+            if (prestamo.getNumeroPrestamo().equals(numeroPrestamo)){
+                prestamo.setFechaPrestamo(nuevaFechaPrestamo);
+                prestamo.setFechaEntrega(nuevaFechaentrega);
+                prestamo.setDescripcion(nuevaDescripcion);
+                break;
+            }
+        }
+    }
+
 
     public int devolverPosicionEmpleado(String cedula) {
         int posicion = -1;
@@ -259,17 +274,12 @@ public class PrestamoUq {
         return posicion;
     }
 
-    /**
-     * Metodo para verificar si un objeto ya existe
-     * @param id
-     * @return
-     */
 
     public int devolverPosicionObjeto(String id) {
         int posicion = -1;
         boolean bandera = false;
-        for(int i = 0; i < listObjetos.size() && bandera == false; i++) {
-            if(listObjetos.get(i).getId().equalsIgnoreCase(id)) {
+        for(int i = 0; i < listaObjetos.size() && bandera == false; i++) {
+            if(listaObjetos.get(i).getId().equalsIgnoreCase(id)) {
                 bandera = true;
                 posicion = i;
             }
@@ -277,11 +287,6 @@ public class PrestamoUq {
         return posicion;
     }
 
-    /**
-     * Metodo para verificar si un cliente ya existe
-     * @param cedula
-     * @return
-     */
 
     public int devolverPosicionCliente(String cedula) {
         int posicion = -1;
@@ -295,35 +300,62 @@ public class PrestamoUq {
         return posicion;
     }
 
-    /**
-     * Metodo para leer o mostrar los clientes
-     */
 
-    public void mostrarCliente(){
-        List<Cliente> listaClientes = obtenerClientes();
-        int tamanoLista = listaClientes.size();
-        for (int i=0; i < tamanoLista; i++){
+    public int devolverPosicionPrestamo(String numeroPrestamo) {
+        int posicion = -1;
+        boolean bandera = false;
+        for(int i = 0; i < listaPrestamos.size() && bandera == false; i++) {
+            if(listaPrestamos.get(i).getNumeroPrestamo().equalsIgnoreCase(numeroPrestamo)) {
+                bandera = true;
+                posicion = i;
+            }
+        }
+        return posicion;
+    }
+
+
+    public Cliente mostrarCliente(String cedula){
+
+        for (int i=0; i < listaClientes.size(); i++){
             Cliente cliente = listaClientes.get(i);
-            System.out.println(cliente.toString());
+            if(cliente.getCedula().equals(cedula)){
+                return cliente;
+            }
         }
+        return null;
     }
 
-    /**
-     * Metodo para leer o mostrar los objetos
-     */
+    public Empleado mostrarEmpleado(String cedula){
 
-    public void mostrarObjeto(){
-        List<Objeto> listaObjetos = obtenerObjetos();
-        int tamanoLista = listaObjetos.size();
-        for (int i=0; i < tamanoLista; i++){
+        for (int i=0; i < listaEmpleados.size(); i++){
+            Empleado empleado = listaEmpleados.get(i);
+            if(empleado.getCedula().equals(cedula)){
+                return empleado;
+            }
+        }
+        return null;
+    }
+
+    public Objeto mostrarObjeto(String id){
+
+        for (int i=0; i < listaObjetos.size(); i++){
             Objeto objeto = listaObjetos.get(i);
-            System.out.println(objeto.toString());
+            if(objeto.getId().equals(id)){
+                return objeto;
+            }
         }
+        return null;
     }
 
-    /**
-     * Metodo para leer o mostrar los empleados
-     */
+
+    public Objeto mostrarInformacionObjeto(String id){
+        int posicion = devolverPosicionObjeto(id);
+        if(posicion != -1){
+            return listaObjetos.get(posicion);
+        }
+        return null;
+    }
+
 
     public void mostrarEmpleado() {
         List<Empleado> listaEmpleado = obtenerEmpleados();
@@ -335,10 +367,128 @@ public class PrestamoUq {
 
     }
 
+
+    public void mostrarPrestamo() {
+        List<Prestamo> listaPrestamos = obtenerPrestamos();
+        int tamanoLista = listaPrestamos.size();
+        for (int i=0; i < tamanoLista; i++){
+            Prestamo prestamo = listaPrestamos.get(i);
+            System.out.println(prestamo.toString());
+        }
+
+    }
+
+
+    public ArrayList<Prestamo> listarPrestamos(String numeroPrestamo) throws Exception{
+        ArrayList<Prestamo> prestamos = new ArrayList<>();
+        for (Prestamo prestamo: listaPrestamos){
+            if (prestamo.getNumeroPrestamo().equals(numeroPrestamo)){
+                listaPrestamos.add(prestamo);
+            }
+        }
+        return prestamos;
+    }
+
+
+    public List<Objeto> obtenerObjetosMasPrestados(int rango) {
+
+        List<Objeto> masPrestados = new ArrayList<>(listaObjetos.stream()
+                .filter(objeto -> objeto.getVecesPrestado() > rango)
+                .toList());
+
+        return masPrestados;
+    }
+
+    public List<Objeto> obtenerObjetosMenosPrestados(int rango) {
+
+        List<Objeto> menosPrestados = new ArrayList<>(listaObjetos.stream()
+                .filter(objeto -> objeto.getVecesPrestado() < rango)
+                .toList());
+
+        return menosPrestados;
+    }
+
+
+
+    public List<Cliente> obtenerClientesMasPrestamos(int rango) {
+
+        List<Cliente> masPrestados = new ArrayList<>(listaClientes.stream()
+                .filter(cliente -> contarPrestamos(cliente.getCedula()) > rango)
+                .toList());
+
+        return masPrestados;
+    }
+
+    public List<Cliente> obtenerClientesMenosPrestamos(int rango) {
+
+        List<Cliente> menosPrestados = new ArrayList<>(listaClientes.stream()
+                .filter(cliente -> contarPrestamos(cliente.getCedula()) < rango)
+                .toList());
+
+        return menosPrestados;
+    }
+
+    public int contarPrestamos(String cedulaCliente){
+        int cantidad = 0;
+
+        for(int i=0; i<listaPrestamos.size(); i++) {
+            Prestamo prestamo = listaPrestamos.get(i);
+            if(prestamo.getCliente().getCedula().equals(cedulaCliente)){
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
+
+    public String estaDisponible(String idObjeto){
+
+        for(int i=0; i<listaPrestamos.size(); i++) {
+            Prestamo prestamo = listaPrestamos.get(i);
+            if( prestamo.getObjeto().getId().equals(idObjeto) ){
+
+                if(prestamo.getFechaEntrega().isAfter(LocalDate.now())){
+                    return "NO";
+                }
+
+            }
+        }
+
+        return "SI";
+
+    }
+
+    public List<Prestamo> listarPrestamosCliente(String cedulaCliente){
+
+        List<Prestamo> respuesta = new ArrayList<>();
+
+        for(Prestamo prestamo : listaPrestamos){
+
+            if(prestamo.getCliente().getCedula().equals(cedulaCliente)){
+                respuesta.add(prestamo);
+            }
+
+        }
+
+        return respuesta;
+    }
+
+
     @Override
     public String toString() {
         return "prestamoUq{" +
                 "nombre='" + nombre + '\'' +
                 '}';
+    }
+
+    public void obtenerCliente(String cedula) {
+    }
+
+    public void crearCliente() {
+    }
+
+    public void actualizarCliente() {
+    }
+
+    public void eliminarCliente() {
     }
 }

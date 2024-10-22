@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="567.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.parcial2.parcial_2_yamis.viewController.InicioViewController">
+   <children>
+      <SplitPane dividerPositions="0.5077821011673151" layoutX="14.0" layoutY="23.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="725.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="723.0">
+               <children>
+                  <Label layoutX="279.0" layoutY="20.0" text="PANEL ADMINISTRATIVO" />
+                  <Separator layoutX="8.0" layoutY="46.0" prefHeight="4.0" prefWidth="706.0" />
+                  <Button fx:id="btnBuscarObjeto" layoutX="208.0" layoutY="90.0" onAction="#onObtenerObjetos" text="Obtener objetos" />
+                  <Label layoutX="401.0" layoutY="65.0" text="OBJETO" />
+                  <Label layoutX="14.0" layoutY="65.0" text="OBJETOS MÁS PRESTADOS" />
+                  <Label layoutX="14.0" layoutY="170.0" text="CLIENTES CON MÁS PRÉSTAMOS" />
+                  <Label layoutX="401.0" layoutY="94.0" text="Id Objeto" />
+                  <Label layoutX="18.0" layoutY="94.0" text="Rango préstamos" />
+                  <Label layoutX="14.0" layoutY="206.0" text="Rango clientes" />
+                  <TextField fx:id="txtIdObjeto" layoutX="484.0" layoutY="90.0" prefHeight="25.0" prefWidth="78.0" />
+                  <TextField fx:id="txtRangoPrestamos" layoutX="119.0" layoutY="90.0" prefHeight="25.0" prefWidth="78.0" />
+                  <TextField fx:id="txtRangoClientes" layoutX="119.0" layoutY="206.0" prefHeight="25.0" prefWidth="78.0" />
+                  <Button fx:id="btnObtenerObjetos" layoutX="577.0" layoutY="90.0" mnemonicParsing="false" onAction="#onBuscarObjeto" prefHeight="25.0" prefWidth="120.0" text="Buscar objeto" />
+                  <Button fx:id="btnObtenerClientes" layoutX="207.0" layoutY="206.0" mnemonicParsing="false" onAction="#onObtenerClientes" text="Obtener Clientes" />
+                  <Label layoutX="400.0" layoutY="170.0" text="CLIENTE" />
+                  <Label layoutX="401.0" layoutY="206.0" text="Cédula Cliente" />
+                  <TextField fx:id="txtCedulaCliente" layoutX="484.0"
+                             layoutY="202.0" prefHeight="25.0" prefWidth="78.0" />
+                  <Button fx:id="btnObtenerObjetos1" layoutX="577.0"
+                          layoutY="202.0" mnemonicParsing="false"
+                          onAction="#onBuscarPrestamos"
+                          text="Información Cliente" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView fx:id="tablaClientes" layoutX="372.0" layoutY="6.0" prefHeight="254.0" prefWidth="349.0">
+                    <columns>
+                      <TableColumn fx:id="tcCedula" prefWidth="71.0" text="Cédula" />
+                      <TableColumn fx:id="tcNombreCliente" minWidth="0.0" prefWidth="99.0" text="Nombre" />
+                        <TableColumn fx:id="tcApellido" minWidth="0.0" prefWidth="109.0" text="Apellido" />
+                        <TableColumn fx:id="tcEdad" minWidth="0.0" prefWidth="71.0" text="Edad" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tablaObjetos" layoutX="3.0" layoutY="6.0" prefHeight="254.0" prefWidth="359.0">
+                    <columns>
+                      <TableColumn fx:id="tcId" minWidth="0.0" prefWidth="53.0" text="Id" />
+                      <TableColumn fx:id="tcNombreObjeto" prefWidth="124.0" text="Nombre" />
+                        <TableColumn fx:id="tcVecesPrestado" minWidth="0.0" prefWidth="98.0" text="Veces prestado" />
+                        <TableColumn fx:id="tcDisponible" minWidth="0.0" prefWidth="83.0" text="Disponible" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
