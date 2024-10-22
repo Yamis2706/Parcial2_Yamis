@@ -15,7 +15,7 @@ public class DataUtil {
         prestamoUq.crearCliente("Lucía", "Méndez", "109344", "56");
         prestamoUq.crearCliente("Marina", "Sánchez", "104456", "23");
         prestamoUq.crearCliente("Sara", "López", "107210", "30");
-        prestamoUq.crearCliente("Sara", "López", "111111", "30");
+        prestamoUq.crearCliente("Camilo", "Pérez", "111111", "39");
 
         prestamoUq.crearEmpleado("José", "Cardona", "180934", "45");
         prestamoUq.crearEmpleado("Felipe", "Cortés", "108734", "28");

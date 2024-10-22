@@ -7,11 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="487.0" prefWidth="746.0"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="co.edu.uniquindio.parcial2.parcial_2_yamis.viewController.ClienteViewController">
+<AnchorPane prefHeight="564.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.parcial2.parcial_2_yamis.viewController.ClienteViewController">
    <children>
       <SplitPane dividerPositions="0.1834862385321101, 0.20550458715596331" layoutX="6.0" layoutY="9.0" orientation="VERTICAL" prefHeight="547.0" prefWidth="734.0">
         <items>
@@ -22,23 +18,14 @@
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-            <TableView fx:id="tablaPrestamos" prefHeight="236.0"
-                       prefWidth="732.0">
+            <TableView fx:id="tablaPrestamos" prefHeight="413.0" prefWidth="732.0">
                <columns>
-                   <TableColumn fx:id="tcNumeroPrestamo" minWidth="0.0"
-                                prefWidth="131.0"
-                                text="Número de préstamo" />
-                  <TableColumn fx:id="tcNombreObjeto" minWidth="0.0"
-                               prefWidth="131.0"
-                               text="Nombre Objeto" />
-                  <TableColumn fx:id="tcIdObjeto" minWidth="0.0"
-                               prefWidth="109.0" text="ID Objeto" />
-                  <TableColumn fx:id="tcFechaPrestamo" minWidth="0.0"
-                               prefWidth="131.0" text="Fecha Préstamo" />
-                  <TableColumn fx:id="tcFechaEntrega" minWidth="0.0"
-                               prefWidth="148.0" text="Fecha Entrega" />
-                  <TableColumn fx:id="tcVecesPrestado" minWidth="0.0"
-                               prefWidth="96.0" text="Veces prestado" />
+                   <TableColumn fx:id="tcNumeroPrestamo" minWidth="0.0" prefWidth="131.0" text="Número de préstamo" />
+                  <TableColumn fx:id="tcNombreObjeto" minWidth="0.0" prefWidth="131.0" text="Nombre Objeto" />
+                  <TableColumn fx:id="tcIdObjeto" minWidth="0.0" prefWidth="73.0" text="ID Objeto" />
+                  <TableColumn fx:id="tcFechaPrestamo" minWidth="0.0" prefWidth="140.0" text="Fecha Préstamo" />
+                  <TableColumn fx:id="tcFechaEntrega" minWidth="0.0" prefWidth="137.0" text="Fecha Entrega" />
+                  <TableColumn fx:id="tcVecesPrestado" minWidth="0.0" prefWidth="134.0" text="Veces prestado" />
                </columns>
             </TableView>
         </items>

@@ -108,6 +108,18 @@ public class InicioViewController implements Initializable {
     }
 
 
+    /*
+    @FXML
+    void onObtenerObjetos(ActionEvent event) {
+        int rango =Integer.parseInt(txtRangoPrestamos.getText());
+        List<ObjetoDto> objetos =
+                inicioController.obtenerObjetosMasPrestados(rango);
+        tablaObjetos.setItems( FXCollections.observableArrayList(objetos) );
+    }
+
+     */
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inicioController = new InicioController();
