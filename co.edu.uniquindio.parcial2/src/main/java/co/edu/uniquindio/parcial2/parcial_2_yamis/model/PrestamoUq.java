@@ -1,10 +1,7 @@
 package co.edu.uniquindio.parcial2.parcial_2_yamis.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class PrestamoUq {
     private String nombre;
@@ -419,6 +416,16 @@ public class PrestamoUq {
         return masPrestados;
     }
 
+    public List<Empleado> obtenerEmpleadosMasPrestamos(int rango) {
+
+        List<Empleado> masPrestados = new ArrayList<>(listaEmpleados.stream()
+                .filter(empleado -> contarPrestamos(empleado.getCedula()) > rango)
+                .toList());
+
+        return masPrestados;
+    }
+
+
     public List<Cliente> obtenerClientesMenosPrestamos(int rango) {
 
         List<Cliente> menosPrestados = new ArrayList<>(listaClientes.stream()
@@ -434,6 +441,18 @@ public class PrestamoUq {
         for(int i=0; i<listaPrestamos.size(); i++) {
             Prestamo prestamo = listaPrestamos.get(i);
             if(prestamo.getCliente().getCedula().equals(cedulaCliente)){
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
+
+    public int contarPrestamosObjetos(String idObjeto){
+        int cantidad = 0;
+
+        for(int i=0; i<listaPrestamos.size(); i++) {
+            Prestamo prestamo = listaPrestamos.get(i);
+            if(prestamo.getObjeto().getId().equals(idObjeto)){
                 cantidad++;
             }
         }
@@ -491,4 +510,5 @@ public class PrestamoUq {
 
     public void eliminarCliente() {
     }
+
 }

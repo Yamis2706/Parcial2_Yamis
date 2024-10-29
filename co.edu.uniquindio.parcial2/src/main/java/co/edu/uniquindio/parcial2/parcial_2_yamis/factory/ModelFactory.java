@@ -1,9 +1,9 @@
 package co.edu.uniquindio.parcial2.parcial_2_yamis.factory;
 
 import co.edu.uniquindio.parcial2.parcial_2_yamis.factory.dto.ClienteDto;
+import co.edu.uniquindio.parcial2.parcial_2_yamis.factory.dto.EmpleadoDto;
 import co.edu.uniquindio.parcial2.parcial_2_yamis.factory.dto.ObjetoDto;
 import co.edu.uniquindio.parcial2.parcial_2_yamis.factory.dto.PrestamoDto;
-import co.edu.uniquindio.parcial2.parcial_2_yamis.model.Cliente;
 import co.edu.uniquindio.parcial2.parcial_2_yamis.model.Objeto;
 import co.edu.uniquindio.parcial2.parcial_2_yamis.model.PrestamoUq;
 import co.edu.uniquindio.parcial2.parcial_2_yamis.util.DataUtil;
@@ -57,6 +57,10 @@ public class ModelFactory {
         return listarClientes();
     }
 
+    public List<EmpleadoDto> listarEmpleados() {
+        return listarEmpleados();
+    }
+
     public ObjetoDto mostrarInformacionObjeto(String id){
         Objeto objeto = prestamoUq.mostrarInformacionObjeto(id);
         if(objeto == null){
@@ -92,6 +96,14 @@ public class ModelFactory {
                 cl -> new ClienteDto(cl.getNombre(), cl.getApellido(),
                         cl.getCedula(),
                         cl.getEdad())
+        ).toList();
+    }
+
+    public List<ClienteDto> obtenerEmpleadosMasPrestamos(int rango) {
+        return prestamoUq.obtenerEmpleadosMasPrestamos(rango).stream().map(
+                em -> new ClienteDto(em.getNombre(), em.getApellido(),
+                        em.getCedula(),
+                        em.getEdad())
         ).toList();
     }
 

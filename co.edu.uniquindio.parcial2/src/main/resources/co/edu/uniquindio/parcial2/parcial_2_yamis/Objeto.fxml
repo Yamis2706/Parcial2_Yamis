@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="co.edu.uniquindio.parcial2.parcial_2_yamis.Objeto"
+            fx:controller="co.edu.uniquindio.parcial2.parcial_2_yamis.viewController.ObjetoViewController"
             prefHeight="400.0" prefWidth="600.0">
 
 </AnchorPane>

@@ -3,6 +3,7 @@ package co.edu.uniquindio.parcial2.parcial_2_yamis.viewController;
 import co.edu.uniquindio.parcial2.parcial_2_yamis.HelloApplication;
 import co.edu.uniquindio.parcial2.parcial_2_yamis.controller.InicioController;
 import co.edu.uniquindio.parcial2.parcial_2_yamis.factory.dto.ClienteDto;
+import co.edu.uniquindio.parcial2.parcial_2_yamis.factory.dto.EmpleadoDto;
 import co.edu.uniquindio.parcial2.parcial_2_yamis.factory.dto.ObjetoDto;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -29,6 +30,9 @@ public class InicioViewController implements Initializable {
     private ObservableList<ClienteDto> listaClientes =
             FXCollections.observableArrayList();
 
+    private ObservableList<EmpleadoDto> listaEmpleados =
+            FXCollections.observableArrayList();
+
     @FXML
     private Button btnBuscar;
 
@@ -39,16 +43,34 @@ public class InicioViewController implements Initializable {
     private TableView<ClienteDto> tablaClientes;
 
     @FXML
-    private TableColumn<ClienteDto, String> tcCedula;
+    private TableView<EmpleadoDto> tablaEmpleados;
+
+    @FXML
+    private TableColumn<ClienteDto, String> Cliente;
 
     @FXML
     private TableColumn<ClienteDto, String> tcNombreCliente;
 
     @FXML
-    private TableColumn<ClienteDto, String> tcApellido;
+    private TableColumn<ClienteDto, String> tcApellidoCliente;
 
     @FXML
-    private TableColumn<ClienteDto, String> tcEdad;
+    private TableColumn<ClienteDto, String> tcEdadCliente;
+
+    @FXML
+    private TableColumn<EmpleadoDto, String> Empleado;
+
+    @FXML
+    private TableColumn<EmpleadoDto, String> tcCedulaEmpleado;
+
+    @FXML
+    private TableColumn<EmpleadoDto, String> tcNombreEmpleado;
+
+    @FXML
+    private TableColumn<EmpleadoDto, String> tcApellidoEmpleado;
+
+    @FXML
+    private TableColumn<EmpleadoDto, String> tcEdadEmpleado;
 
     @FXML
     private TableColumn<ObjetoDto, String> tcId;
@@ -107,6 +129,14 @@ public class InicioViewController implements Initializable {
         tablaClientes.setItems( FXCollections.observableArrayList(clientes) );
     }
 
+    @FXML
+    void onObtenerEmpleados(ActionEvent event) {
+        int rango =Integer.parseInt(txtRangoClientes.getText());
+        List<ClienteDto> empleados =
+                inicioController.obtenerEmpleadosMasPrestamos(rango);
+        tablaEmpleados.setItems( FXCollections.observableArrayList() );
+    }
+
 
     /*
     @FXML
@@ -125,6 +155,7 @@ public class InicioViewController implements Initializable {
         inicioController = new InicioController();
         initViewObjetos();
         initViewClientes();
+        initViewEmpleados();
     }
 
     private void initViewObjetos() {
@@ -141,6 +172,13 @@ public class InicioViewController implements Initializable {
         //listenerSelection();
     }
 
+    private void initViewEmpleados() {
+        initDataBindingEmpleados();
+        tablaEmpleados.getItems().clear();
+        tablaEmpleados.setItems(listaEmpleados);
+        //listenerSelection();
+    }
+
     /*private void listarObjetos() {
         listaObjetos.addAll(objetoController.listarVendedores());
     }*/
@@ -153,10 +191,17 @@ public class InicioViewController implements Initializable {
     }
 
     private void initDataBindingClientes() {
-        tcCedula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().cedula()));
+        txtCedulaCliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().cedula()));
         tcNombreCliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
-        tcApellido.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().apellido()));
-        tcEdad.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().edad()));
+        tcApellidoCliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().apellido()));
+        tcEdadCliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().edad()));
+    }
+
+    private void initDataBindingEmpleados() {
+        tcCedulaEmpleado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().cedula()));
+        tcNombreEmpleado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
+        tcApellidoEmpleado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().apellido()));
+        tcEdadEmpleado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().edad()));
     }
 
     public void onBuscarPrestamos(ActionEvent actionEvent) {

@@ -1,6 +1,6 @@
 package co.edu.uniquindio.parcial2.parcial_2_yamis.util;
 
-import co.edu.uniquindio.parcial2.parcial_2_yamis.model.Cliente;
+
 import co.edu.uniquindio.parcial2.parcial_2_yamis.model.PrestamoUq;
 
 import java.time.LocalDate;
@@ -79,7 +79,7 @@ public class DataUtil {
         prestamoUq.crearPrestamo("852", "103371", "180934", "C015",
                 LocalDate.of(2024, 10, 2),
                 LocalDate.of(2024, 10, 18), "Préstamo de un cargador" );
-        prestamoUq.crearPrestamo("511", "111111", "180934", "U429",
+        prestamoUq.crearPrestamo("511", "111111", "180934", "C015",
                 LocalDate.of(2024, 10, 2),
                 LocalDate.of(2024, 10, 18), "Préstamo de un cargador" );
 

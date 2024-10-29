@@ -26,6 +26,10 @@ public class InicioController {
         return modelFactory.obtenerClientesMasPrestamos(rango);
     }
 
+    public List<ClienteDto> obtenerEmpleadosMasPrestamos(int rango){
+        return modelFactory.obtenerEmpleadosMasPrestamos(rango);
+    }
+
     public List<ClienteDto> obtenerClientesMenosPrestamos(int rango){
         return modelFactory.obtenerClientesMenosPrestamos(rango);
     }
